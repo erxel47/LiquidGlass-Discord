@@ -2,7 +2,7 @@
  * @name Liquid Glass Dark
  * @author erxel47
  * @description iOS 26 Liquid Glass inspired OLED dark theme – frosted glass panels, milky popouts, wallpaper presets.
- * @version 1.2.3
+ * @version 1.2.4
  * @source https://github.com/erxel47/LiquidGlass-Discord
  */
 
@@ -321,7 +321,12 @@ section[class*="panels_"] {
 [class*="circleIconButton_"] {
   background: rgba(255, 255, 255, 0.07) !important;
   box-shadow: inset 0 1px 0 var(--lg-highlight);
-  color: var(--lg-green) !important;
+  color: var(--lg-accent) !important;
+}
+[class*="circleIconButton_"] svg,
+[class*="circleIconButton_"] svg path {
+  color: var(--lg-accent) !important;
+  fill: currentColor;
 }
 
 /* Kanal-Einträge als Glas-Pillen */
@@ -726,8 +731,9 @@ button[class*="lookFilled_"][class*="colorPrimary_"] {
   color: #fff !important;
 }
 [class*="addFriend_"] {
-  background: var(--lg-green) !important;
-  color: #000 !important;
+  background: var(--lg-accent) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 14px rgba(10, 132, 255, 0.35);
   border-radius: 999px !important;
 }
 
