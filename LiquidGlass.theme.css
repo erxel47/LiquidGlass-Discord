@@ -1,0 +1,1138 @@
+/**
+ * @name Liquid Glass Dark
+ * @author erxel47
+ * @description iOS 26 Liquid Glass inspired OLED dark theme – frosted glass panels, milky popouts, wallpaper presets.
+ * @version 1.2.0
+ * @source https://github.com/erxel47/LiquidGlass-Discord
+ */
+
+/* ==========================================================================
+   1. EINSTELLUNGEN – hier anpassen
+   ========================================================================== */
+:root {
+  /* Hintergrund-Wallpaper. Eigenes Bild: url("https://…/bild.jpg") */
+  /* WALLPAPER-PRESETS – das aktive ist --lg-wallpaper.
+     Zum Wechseln: unten --lg-wallpaper: var(--lg-wp-…); ändern.
+     Reines OLED Black:  --lg-wallpaper: #000; */
+
+  /* 1) Leuchtbögen – geschwungene Lichtbänder aus der Ecke (aktiv) */
+  --lg-wp-bogen:
+    radial-gradient(ellipse 150% 115% at 112% 125%,
+      transparent 50%, rgba(10, 132, 255, 0.10) 54%, rgba(10, 132, 255, 0.55) 58.5%,
+      rgba(94, 92, 230, 0.40) 61.5%, rgba(94, 92, 230, 0.08) 66%, transparent 71%),
+    radial-gradient(ellipse 125% 95% at 118% 135%,
+      transparent 52%, rgba(191, 90, 242, 0.12) 57%, rgba(191, 90, 242, 0.45) 61%,
+      rgba(255, 55, 95, 0.22) 64.5%, transparent 71%),
+    radial-gradient(ellipse 175% 135% at 108% 118%,
+      transparent 58%, rgba(100, 210, 255, 0.16) 62%, transparent 66%),
+    radial-gradient(ellipse 60% 55% at 100% 100%, rgba(10, 132, 255, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 60% at 0% 0%, rgba(40, 40, 60, 0.35) 0%, transparent 70%),
+    #000;
+
+  /* 2) Mitternacht – tiefes Navy, oben leicht heller */
+  --lg-wp-mitternacht:
+    radial-gradient(ellipse 110% 70% at 50% -10%, rgba(30, 60, 140, 0.55) 0%, rgba(10, 20, 60, 0.35) 45%, transparent 75%),
+    radial-gradient(ellipse 80% 50% at 50% 115%, rgba(20, 10, 60, 0.6) 0%, transparent 70%),
+    linear-gradient(180deg, #02040c 0%, #000 100%);
+
+  /* 3) Sonnenuntergang – warmes Glühen am unteren Rand */
+  --lg-wp-sunset:
+    radial-gradient(ellipse 90% 45% at 50% 112%, rgba(255, 120, 40, 0.55) 0%, rgba(255, 55, 95, 0.30) 35%, rgba(120, 40, 160, 0.15) 60%, transparent 80%),
+    radial-gradient(ellipse 60% 35% at 15% 100%, rgba(255, 55, 95, 0.25) 0%, transparent 70%),
+    #000;
+
+  /* 4) Aurora – grün/türkise Nordlichter oben */
+  --lg-wp-aurora:
+    radial-gradient(ellipse 70% 35% at 30% 0%, rgba(48, 209, 88, 0.40) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 70% 5%, rgba(100, 210, 255, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 30% at 90% 15%, rgba(191, 90, 242, 0.25) 0%, transparent 70%),
+    #000;
+
+  /* 5) Farbschleier – weiche Flecken in allen Ecken (vorherige Version) */
+  --lg-wp-schleier:
+    radial-gradient(ellipse 120% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.65) 100%),
+    radial-gradient(ellipse 75% 60% at 8% 105%, rgba(72, 52, 255, 0.50) 0%, rgba(72, 52, 255, 0.12) 40%, transparent 70%),
+    radial-gradient(ellipse 65% 55% at 98% -8%, rgba(10, 132, 255, 0.42) 0%, rgba(10, 132, 255, 0.10) 42%, transparent 72%),
+    radial-gradient(ellipse 45% 40% at 78% 72%, rgba(175, 82, 222, 0.26) 0%, transparent 70%),
+    #000;
+
+  /* ▼ HIER WECHSELN: bogen | mitternacht | sunset | aurora | schleier */
+  --lg-wallpaper: var(--lg-wp-bogen);
+
+  /* Glas */
+  --lg-blur: 28px;  /* Unschärfe – höher = schöner, aber langsamer */
+  --lg-saturate: 160%;
+  --lg-backdrop: blur(var(--lg-blur)) saturate(var(--lg-saturate));
+  --lg-tint: rgba(8, 8, 12, 0.58);           /* Standard-Glas: dunkles Milchglas über dem Wallpaper */
+  --lg-tint-strong: rgba(32, 32, 36, 0.86);  /* Popouts / Modals: milchiges Glas */
+  /* Milchglas-Material (Einstellungen, Menüs, Fenster) */
+  --lg-milk-bg:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(0, 0, 0, 0.88);
+  --lg-milk-backdrop: blur(var(--lg-blur)) saturate(140%);
+  --lg-tint-soft: rgba(255, 255, 255, 0.05); /* Hover */
+  --lg-tint-active: rgba(255, 255, 255, 0.11);
+  --lg-border: rgba(255, 255, 255, 0.10);
+  --lg-highlight: rgba(255, 255, 255, 0.24); /* Lichtkante oben */
+  --lg-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+
+  /* Formen */
+  --lg-radius: 24px;
+  --lg-radius-md: 16px;
+  --lg-radius-sm: 11px;
+  --lg-gap: 8px;
+
+  /* iOS Systemfarben (Dark) */
+  --lg-accent: #0a84ff;
+  --lg-green: #30d158;
+  --lg-red: #ff453a;
+  --lg-orange: #ff9f0a;
+  --lg-text: rgba(255, 255, 255, 0.94);
+  --lg-text-2: rgba(235, 235, 245, 0.62);
+  --lg-text-3: rgba(235, 235, 245, 0.38);
+
+  --lg-font: -apple-system, "SF Pro Text", "SF Pro Display", "Inter", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+}
+
+/* Wiederverwendbares Glas-Material */
+:root {
+  --lg-glass-bg:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 40%, rgba(255, 255, 255, 0) 100%),
+    var(--lg-tint);
+  --lg-glass-shadow:
+    inset 0 1px 0 0 var(--lg-highlight),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.04),
+    inset 1px 0 0 0 rgba(255, 255, 255, 0.05),
+    var(--lg-shadow);
+}
+
+/* ==========================================================================
+   2. DISCORD VARIABLEN (klassisch + Visual Refresh)
+   ========================================================================== */
+.theme-dark,
+.theme-darker,
+.theme-midnight,
+.visual-refresh.theme-dark,
+:root .theme-dark {
+  --font-primary: var(--lg-font);
+  --font-display: var(--lg-font);
+
+  --background-primary: transparent;
+  --background-secondary: transparent;
+  --background-secondary-alt: transparent;
+  --background-tertiary: transparent;
+  --background-floating: var(--lg-tint-strong);
+  --background-nested-floating: var(--lg-tint-strong);
+  --background-accent: var(--lg-tint-active);
+  --background-modifier-hover: var(--lg-tint-soft);
+  --background-modifier-active: var(--lg-tint-active);
+  --background-modifier-selected: var(--lg-tint-active);
+  --background-modifier-accent: var(--lg-border);
+  --background-message-hover: rgba(255, 255, 255, 0.035);
+  --background-mobile-primary: transparent;
+  --background-mobile-secondary: transparent;
+
+  /* Visual Refresh (2025+) */
+  --background-base-lowest: transparent;
+  --background-base-lower: transparent;
+  --background-base-low: transparent;
+  --background-surface-high: var(--lg-tint-strong);
+  --background-surface-higher: var(--lg-tint-strong);
+  --background-surface-highest: var(--lg-tint-strong);
+  --bg-base-primary: transparent;
+  --bg-base-secondary: transparent;
+  --bg-base-tertiary: transparent;
+  --bg-surface-raised: var(--lg-tint-strong);
+  --bg-surface-overlay: var(--lg-tint-strong);
+  --chat-background-default: transparent;
+  --app-frame-background: transparent;
+  --app-frame-border: transparent;
+  --border-subtle: var(--lg-border);
+  --border-faint: rgba(255, 255, 255, 0.05);
+  --border-normal: var(--lg-border);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --modal-background: var(--lg-tint-strong);
+  --modal-footer-background: transparent;
+  --input-background: rgba(255, 255, 255, 0.06);
+  --channeltextarea-background: transparent;
+  --deprecated-store-bg: transparent;
+  --home-background: transparent;
+  --activity-card-background: var(--lg-tint);
+  --profile-gradient-overlay-color: transparent;
+
+  --text-normal: var(--lg-text);
+  --text-default: var(--lg-text);
+  --text-strong: #fff;
+  --header-primary: #fff;
+  --header-secondary: var(--lg-text-2);
+  --text-muted: var(--lg-text-3);
+  --text-subtle: var(--lg-text-2);
+  --interactive-normal: var(--lg-text-2);
+  --interactive-hover: var(--lg-text);
+  --interactive-active: #fff;
+  --interactive-muted: var(--lg-text-3);
+  --channels-default: var(--lg-text-2);
+  --channel-icon: var(--lg-text-3);
+  --text-link: #64d2ff;
+
+  --brand-experiment: var(--lg-accent);
+  --brand-500: var(--lg-accent);
+  --brand-560: #0077ed;
+  --brand-360: #409cff;
+  --button-filled-brand-background: var(--lg-accent);
+  --control-brand-foreground: var(--lg-accent);
+  --status-positive: var(--lg-green);
+  --status-danger: var(--lg-red);
+  --status-warning: var(--lg-orange);
+  --green-360: var(--lg-green);
+  --red-400: var(--lg-red);
+
+  --scrollbar-thin-thumb: rgba(255, 255, 255, 0.18);
+  --scrollbar-thin-track: transparent;
+  --scrollbar-auto-thumb: rgba(255, 255, 255, 0.18);
+  --scrollbar-auto-track: transparent;
+
+  --radius-xs: 8px;
+  --radius-sm: var(--lg-radius-sm);
+  --radius-md: var(--lg-radius-md);
+  --radius-lg: var(--lg-radius);
+}
+
+/* ==========================================================================
+   3. WALLPAPER & BASIS
+   ========================================================================== */
+html,
+body {
+  background: var(--lg-wallpaper) !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
+  font-family: var(--lg-font) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app-mount,
+[class*="appMount_"],
+[class*="app_"],
+[class*="bg__"],
+[class*="layers_"],
+[class*="layer_"],
+[class*="container_"][class*="base_"],
+[class*="base_"],
+[class*="content_"] > [class*="page_"],
+[class*="chat_"],
+[class*="chatContent_"],
+[class*="messagesWrapper_"],
+[class*="container_"][class*="themed_"],
+[class*="privateChannels_"],
+[class*="scroller_"][class*="guilds_"],
+[class*="wrapper_"][class*="guilds_"] {
+  background: transparent !important;
+}
+
+/* Titelleiste (Desktop) */
+[class*="titleBar_"],
+[class*="typeWindows_"],
+[class*="bar_"][class*="base_"] {
+  background: transparent !important;
+}
+
+/* ==========================================================================
+   4. GLASPANELE – schwebende Inseln wie in iOS 26
+   ========================================================================== */
+[class*="base_"] > [class*="content_"] {
+  gap: var(--lg-gap);
+  padding: 0 var(--lg-gap) var(--lg-gap) 0;
+}
+
+/* Serverleiste */
+nav[class*="guilds_"] {
+  margin: 0 0 var(--lg-gap) var(--lg-gap);
+  border-radius: var(--lg-radius) !important;
+  background: var(--lg-glass-bg) !important;
+  box-shadow: var(--lg-glass-shadow);
+  border: 1px solid var(--lg-border);
+}
+
+/* Kanal-Sidebar */
+[class*="sidebar_"]:not([class*="sidebarList_"]) {
+  border-radius: var(--lg-radius) !important;
+  background: var(--lg-glass-bg) !important;
+  box-shadow: var(--lg-glass-shadow);
+  border: 1px solid var(--lg-border) !important;
+  overflow: hidden;
+}
+
+/* Chatbereich */
+[class*="chat_"]:not([class*="chatContent_"]),
+[class*="page_"] > [class*="container_"]:not([class*="chat_"]) {
+  border-radius: var(--lg-radius) !important;
+  background: var(--lg-glass-bg) !important;
+  box-shadow: var(--lg-glass-shadow);
+  border: 1px solid var(--lg-border) !important;
+  overflow: hidden;
+}
+
+/* Kopfzeile im Chat */
+section[class*="title_"],
+[class*="container_"] > section[class*="title_"],
+[class*="upperContainer_"] {
+  background: rgba(255, 255, 255, 0.025) !important;
+  border-bottom: 1px solid var(--lg-border) !important;
+  box-shadow: none !important;
+}
+
+/* Mitgliederliste & Profilpanel */
+[class*="membersWrap_"],
+[class*="members_"],
+[class*="profilePanel_"],
+[class*="userPanelOuter_"] {
+  background: transparent !important;
+}
+[class*="membersWrap_"] {
+  margin-left: var(--lg-gap);
+  border-radius: var(--lg-radius);
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-left: 1px solid var(--lg-border);
+}
+
+/* User-Panel unten links */
+section[class*="panels_"] {
+  margin: var(--lg-gap);
+  border-radius: calc(var(--lg-radius) - 4px) !important;
+  /* Milchglas: liegt über der Liste, darum verschwommen + milchig */
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%),
+    rgba(0, 0, 0, 0.78) !important;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 28px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* ==========================================================================
+   5. SERVER-ICONS & KANÄLE
+   ========================================================================== */
+[class*="listItem_"] [class*="wrapper_"] svg foreignObject,
+[class*="blobContainer_"] {
+  border-radius: 16px;
+}
+
+[class*="circleIconButton_"] {
+  background: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: inset 0 1px 0 var(--lg-highlight);
+  color: var(--lg-green) !important;
+}
+
+/* Kanal-Einträge als Glas-Pillen */
+[class*="containerDefault_"] [class*="link_"],
+[class*="channel_"] [class*="interactive_"],
+[class*="privateChannels_"] [class*="interactive_"] {
+  border-radius: var(--lg-radius-sm) !important;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+[class*="modeSelected_"] [class*="link_"],
+[class*="selected_"] > [class*="interactive_"],
+[class*="interactiveSelected_"] {
+  background: var(--lg-tint-active) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Kategorie-Überschriften im iOS-Stil */
+[class*="mainContent_"] h3[class*="name_"],
+[class*="containerDefault_"] [class*="name_"] h3 {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--lg-text-3) !important;
+}
+
+/* ==========================================================================
+   6. NACHRICHTEN
+   ========================================================================== */
+[class*="message_"][class*="cozy_"] {
+  border-radius: var(--lg-radius-md);
+  margin: 0 8px;
+  transition: background 0.15s ease;
+}
+[class*="message_"]:hover {
+  background: var(--background-message-hover) !important;
+}
+
+[class*="mentioned_"] {
+  background: rgba(255, 159, 10, 0.08) !important;
+  box-shadow: inset 2px 0 0 var(--lg-orange);
+}
+[class*="mentioned_"]::before {
+  display: none;
+}
+
+/* Hover-Toolbar an Nachrichten */
+[class*="buttonsInner_"],
+[class*="buttons_"] [class*="wrapper_"] {
+  background: var(--lg-tint-strong) !important;
+  backdrop-filter: var(--lg-backdrop);
+  border-radius: 14px !important;
+  border: 1px solid var(--lg-border) !important;
+  box-shadow: inset 0 1px 0 var(--lg-highlight), 0 6px 18px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Embeds, Codeblöcke, Anhänge */
+article[class*="embedFull_"],
+[class*="embedFull_"],
+[class*="attachment_"],
+[class*="wrapper_"][class*="nonVisualMediaItemContainer_"],
+.hljs,
+code.inline {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-sm) !important;
+}
+pre code.hljs {
+  border-radius: var(--lg-radius-sm) !important;
+}
+
+/* Reaktionen */
+[class*="reaction_"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-radius: 999px !important;
+  border: 1px solid var(--lg-border) !important;
+}
+[class*="reactionMe_"] {
+  background: rgba(10, 132, 255, 0.2) !important;
+  border-color: rgba(10, 132, 255, 0.55) !important;
+}
+
+/* Trennlinien */
+[class*="divider_"][class*="hasContent_"] {
+  border-top-color: var(--lg-border) !important;
+}
+[class*="divider_"] span[class*="content_"] {
+  background: transparent !important;
+}
+
+/* ==========================================================================
+   7. EINGABEFELD – schwebende Glas-Kapsel
+   ========================================================================== */
+form [class*="channelTextArea_"] {
+  background: transparent !important;
+}
+form [class*="channelTextArea_"] > [class*="scrollableContainer_"] {
+  border-radius: 22px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow:
+    inset 0 1px 0 var(--lg-highlight),
+    0 8px 30px rgba(0, 0, 0, 0.35) !important;
+}
+form [class*="channelTextArea_"]:focus-within > [class*="scrollableContainer_"] {
+  border-color: rgba(10, 132, 255, 0.55) !important;
+  box-shadow:
+    inset 0 1px 0 var(--lg-highlight),
+    0 0 0 3px rgba(10, 132, 255, 0.18),
+    0 8px 30px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Suchfelder & Inputs */
+[class*="inputDefault_"] {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-sm) !important;
+}
+
+/* ==========================================================================
+   8. POPOUTS, MENÜS, TOOLTIPS, MODALS
+   ========================================================================== */
+[class*="menu_"][role="menu"],
+[class*="popout_"],
+[class*="userPopoutOuter_"],
+[class*="userPopoutInner_"],
+[class*="autocomplete_"],
+[class*="container_"][class*="popout"],
+[class*="browser_"],
+[class*="quickswitcher_"],
+[role="dialog"][class*="root_"],
+[class*="modal_"][class*="root_"] {
+  background: var(--lg-milk-bg) !important;
+  backdrop-filter: var(--lg-milk-backdrop) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: var(--lg-radius) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 24px 70px rgba(0, 0, 0, 0.6) !important;
+  overflow: hidden;
+}
+
+/* Menü-Einträge */
+[role="menu"] [class*="item_"] {
+  border-radius: 10px !important;
+  margin: 1px 6px;
+}
+[role="menu"] [class*="item_"][class*="focused_"] {
+  background: var(--lg-accent) !important;
+  color: #fff !important;
+}
+[role="menu"] [class*="colorDanger_"][class*="focused_"] {
+  background: var(--lg-red) !important;
+}
+[role="menu"] [role="separator"] {
+  border-color: var(--lg-border) !important;
+}
+
+/* Tooltips */
+[class*="tooltip_"][class*="tooltipPrimary_"],
+[class*="tooltip_"] {
+  background: rgba(14, 14, 16, 0.92) !important;
+  backdrop-filter: var(--lg-backdrop);
+  border: 1px solid var(--lg-border);
+  border-radius: 12px !important;
+  box-shadow: inset 0 1px 0 var(--lg-highlight), 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+  color: var(--lg-text) !important;
+}
+[class*="tooltipPointer_"] {
+  display: none !important;
+}
+
+/* Modal-Hintergrund */
+[class*="backdrop_"],
+[class*="scrim_"] {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* Einstellungen – Milchglas
+   Das Glas sitzt auf der ganzen Ebene (Layer), nicht auf einem inneren
+   Element: Discord animiert die Ebene, dadurch kann ein inneres Element
+   nichts dahinter verwischen und wirkt komplett transparent. */
+[class*="layers_"] > [class*="layer_"]:not([class*="baseLayer_"]) {
+  background: var(--lg-milk-bg) !important;
+  backdrop-filter: var(--lg-milk-backdrop) !important;
+  -webkit-backdrop-filter: var(--lg-milk-backdrop) !important;
+}
+[class*="standardSidebarView_"],
+[class*="sidebarRegionScroller_"],
+[class*="contentRegion_"],
+[class*="contentRegionScroller_"],
+[class*="contentColumn_"] {
+  background: transparent !important;
+}
+[class*="sidebarRegion_"] {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-right: 1px solid var(--lg-border);
+}
+[class*="side_"] [class*="item_"] {
+  border-radius: 10px !important;
+}
+[class*="side_"] [class*="item_"][class*="selected_"] {
+  background: var(--lg-accent) !important;
+  color: #fff !important;
+}
+
+/* ==========================================================================
+   9. BUTTONS & SCHALTER (iOS-Stil)
+   ========================================================================== */
+button[class*="button_"][class*="lookFilled_"],
+button[class*="button_"][class*="colorBrand_"],
+button[class*="button_"][class*="colorGreen_"],
+button[class*="button_"][class*="colorRed_"],
+button[class*="button_"][class*="colorPrimary_"] {
+  border-radius: 999px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+button[class*="button_"]:active {
+  transform: scale(0.97);
+}
+button[class*="colorPrimary_"],
+button[class*="lookFilled_"][class*="colorPrimary_"] {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Toggle-Schalter */
+[class*="container_"][class*="checked_"] {
+  background-color: var(--lg-green) !important;
+}
+[class*="slider_"] svg rect,
+[class*="container_"] svg[class*="slider_"] rect {
+  fill: #fff !important;
+}
+
+/* ==========================================================================
+   10. AVATARE, STATUS, SCROLLBARS
+   ========================================================================== */
+[class*="unread_"][class*="pill"],
+[class*="numberBadge_"],
+[class*="mentionsBadge_"] [class*="numberBadge_"] {
+  background-color: var(--lg-red) !important;
+  box-shadow: 0 2px 8px rgba(255, 69, 58, 0.45);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+[class*="scroller_"]::-webkit-scrollbar-track,
+[class*="scroller_"]::-webkit-scrollbar-thumb {
+  border-color: transparent !important;
+}
+
+/* Auswahl */
+::selection {
+  background: rgba(10, 132, 255, 0.45);
+  color: #fff;
+}
+
+/* ==========================================================================
+   11. FEINSCHLIFF
+   ========================================================================== */
+/* Sanftere Übergänge überall */
+[class*="interactive_"],
+[class*="link_"],
+[class*="item_"] {
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+/* Voice-Panel & RTC */
+[class*="container_"][class*="rtcConnectionStatus"],
+[class*="wrapper_"][class*="voiceUsers"] {
+  background: transparent !important;
+}
+
+/* Bessere Performance auf schwachen PCs: Blur reduzieren
+   → --lg-blur oben z.B. auf 12px setzen */
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --lg-tint: #000;
+    --lg-tint-strong: rgba(10, 10, 12, 0.98);
+  }
+}
+
+/* ==========================================================================
+   12. SERVER-HEADER, ORDNER & UNGELESEN-ANZEIGEN
+   ========================================================================== */
+/* Servername oben in der Kanalliste */
+[class*="sidebar_"] header[class*="header_"],
+[class*="sidebar_"] [class*="headerContent_"],
+[class*="animatedContainer_"],
+[class*="bannerImage_"] {
+  background: transparent !important;
+}
+[class*="sidebar_"] header[class*="header_"] {
+  border-bottom: 1px solid var(--lg-border) !important;
+  box-shadow: none !important;
+}
+[class*="sidebar_"] header[class*="header_"]:hover {
+  background: var(--lg-tint-soft) !important;
+}
+
+/* Server-Ordner */
+[class*="folder_"],
+[class*="expandedFolderBackground_"],
+[class*="folderIconWrapper_"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-radius: 16px !important;
+}
+[class*="expandedFolderBackground_"] {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Weiße Pille links an Servern */
+[class*="pill_"] [class*="item_"] {
+  background-color: #fff !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Trennlinie in Serverleiste */
+[class*="guildSeparator_"] {
+  background-color: var(--lg-border) !important;
+}
+
+/* Ungelesene Kanäle */
+[class*="modeUnread_"] [class*="name_"] {
+  color: #fff !important;
+  font-weight: 600;
+}
+[class*="unread_"][class*="unreadImportant_"] {
+  background-color: #fff !important;
+}
+
+/* "Neue Nachrichten"-Leiste & Mentions-Leiste */
+[class*="newMessagesBar_"],
+[class*="unreadMentionsBar_"],
+[class*="jumpToPresentBar_"] {
+  background: rgba(10, 110, 220, 0.95) !important;
+  backdrop-filter: var(--lg-backdrop);
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 6px 20px rgba(0, 0, 0, 0.35);
+  margin: 6px 12px;
+  border: none !important;
+}
+[class*="jumpToPresentBar_"] {
+  background: var(--lg-tint-strong) !important;
+  border: 1px solid var(--lg-border) !important;
+}
+
+/* ==========================================================================
+   13. FREUNDESLISTE & STARTSEITE
+   ========================================================================== */
+[class*="peopleColumn_"],
+[class*="nowPlayingColumn_"],
+[class*="tabBody_"],
+[class*="container_"][class*="emptyPage_"] {
+  background: transparent !important;
+}
+[class*="nowPlayingColumn_"] {
+  border-left: 1px solid var(--lg-border) !important;
+}
+[class*="peopleListItem_"] {
+  border-radius: var(--lg-radius-md) !important;
+  margin: 2px 10px !important;
+  padding: 0 10px !important;
+  border-top: none !important;
+}
+[class*="peopleListItem_"]:hover {
+  background: var(--lg-tint-soft) !important;
+}
+[class*="actionButton_"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--lg-border);
+}
+
+/* Tabs (Online / Alle / Ausstehend …) als Segmented Control */
+[class*="tabBar_"] [class*="item_"] {
+  border-radius: 999px !important;
+  padding: 3px 12px !important;
+}
+[class*="tabBar_"] [class*="item_"][class*="selected_"] {
+  background: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #fff !important;
+}
+[class*="addFriend_"] {
+  background: var(--lg-green) !important;
+  color: #000 !important;
+  border-radius: 999px !important;
+}
+
+/* Aktiv-Jetzt-Karten */
+[class*="nowPlayingColumn_"] [class*="itemCard_"],
+[class*="activeNowCard_"] {
+  background: var(--lg-glass-bg) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-md) !important;
+  box-shadow: inset 0 1px 0 var(--lg-highlight);
+}
+
+/* ==========================================================================
+   14. THREADS, FOREN, SUCHE, INBOX, PINS
+   ========================================================================== */
+[class*="chatLayerWrapper_"],
+[class*="container_"][class*="threadSidebar"],
+[class*="searchResultsWrap_"],
+[class*="searchResults_"],
+[class*="searchHeader_"],
+[class*="resizeHandle_"] {
+  background: transparent !important;
+}
+[class*="chatLayerWrapper_"] > [class*="container_"],
+section[class*="searchResultsWrap_"],
+aside[class*="searchResultsWrap_"] {
+  background: var(--lg-glass-bg) !important;
+  border-left: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius) !important;
+  box-shadow: var(--lg-glass-shadow);
+  margin-left: var(--lg-gap);
+  overflow: hidden;
+}
+
+/* Suchergebnisse */
+[class*="searchResult_"],
+[class*="searchResultMessage_"] {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-md) !important;
+}
+
+/* Foren-Posts */
+[class*="mainCard_"],
+[class*="container_"][class*="forumPost"] {
+  background: var(--lg-glass-bg) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-md) !important;
+  box-shadow: inset 0 1px 0 var(--lg-highlight), 0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+[class*="mainCard_"]:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 var(--lg-highlight), 0 10px 26px rgba(0, 0, 0, 0.4) !important;
+}
+[class*="tagsContainer_"] [class*="pill_"],
+[class*="tag_"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 999px !important;
+}
+
+/* Thread-Vorschau unter Nachrichten */
+[class*="container_"][class*="threadMessageAccessory"],
+[class*="threadMessageAccessory_"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--lg-border);
+  border-radius: var(--lg-radius-sm) !important;
+}
+
+/* Inbox / Pins / Erwähnungen */
+[class*="recentMentionsPopout_"],
+[class*="messagesPopoutWrap_"],
+[class*="messagesPopout_"],
+[class*="header_"][class*="messagesPopout"] {
+  background: transparent !important;
+}
+[class*="messageGroupWrapper_"],
+[class*="messageGroupWrapper"] {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-md) !important;
+}
+
+/* ==========================================================================
+   15. VOICE, CALLS & STREAMS
+   ========================================================================== */
+[class*="callContainer_"],
+[class*="wrapper_"][class*="video"],
+[class*="root_"][class*="videoGrid"] {
+  background: transparent !important;
+}
+[class*="callContainer_"] {
+  border-radius: var(--lg-radius) !important;
+  overflow: hidden;
+}
+[class*="tile_"],
+[class*="videoWrapper_"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: var(--lg-radius-md) !important;
+  border: 1px solid var(--lg-border);
+  overflow: hidden;
+}
+
+/* Steuerleiste im Call */
+[class*="videoControls_"] [class*="wrapper_"],
+[class*="bottomControls_"] {
+  background: var(--lg-tint-strong) !important;
+  backdrop-filter: var(--lg-backdrop);
+  border-radius: 999px !important;
+  padding: 6px 10px;
+  box-shadow: inset 0 1px 0 var(--lg-highlight), 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+[class*="centerButton_"] {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-radius: 999px !important;
+}
+[class*="centerButton_"][class*="red"],
+button[class*="redGlow_"] {
+  background: var(--lg-red) !important;
+}
+
+/* Sprechen-Ring */
+[class*="avatarSpeaking_"] {
+  box-shadow: inset 0 0 0 2px var(--lg-green), 0 0 10px rgba(48, 209, 88, 0.6) !important;
+}
+[class*="border_"][class*="speaking_"] {
+  border-color: var(--lg-green) !important;
+  box-shadow: 0 0 14px rgba(48, 209, 88, 0.5);
+}
+
+/* Voice-Verbindungsanzeige */
+[class*="rtcConnectionStatusConnected_"] {
+  color: var(--lg-green) !important;
+}
+
+/* ==========================================================================
+   16. PROFILE
+   ========================================================================== */
+[class*="userProfileOuter_"],
+[class*="userProfileInner_"],
+[class*="user-profile-popout"],
+[class*="biteSize_"],
+[class*="fullSize_"] {
+  background: var(--lg-tint-strong) !important;
+  backdrop-filter: var(--lg-backdrop);
+  border-radius: var(--lg-radius) !important;
+}
+[class*="userProfileInner_"]::before,
+[class*="overlay_"][class*="userProfile"] {
+  background: transparent !important;
+}
+[class*="profileBio_"],
+[class*="section_"][class*="profile"],
+[class*="userProfileModalInner_"] [class*="body_"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: var(--lg-radius-md) !important;
+}
+
+/* ==========================================================================
+   17. MARKDOWN, SPOILER, UMFRAGEN
+   ========================================================================== */
+[class*="blockquoteDivider_"] {
+  background-color: var(--lg-accent) !important;
+  border-radius: 4px;
+}
+[class*="spoilerContent_"][class*="hidden_"],
+[class*="spoilerText_"][class*="hidden_"] {
+  background: rgba(255, 255, 255, 0.18) !important;
+  backdrop-filter: blur(10px);
+  border-radius: 6px;
+}
+[class*="spoilerContent_"]:not([class*="hidden_"]) {
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* Mentions im Text */
+.mention,
+[class*="mention"][class*="wrapper_"] {
+  background: rgba(10, 132, 255, 0.22) !important;
+  color: #64d2ff !important;
+  border-radius: 6px;
+}
+
+/* Umfragen */
+[class*="pollContainer_"],
+[class*="container_"][class*="poll"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-md) !important;
+}
+[class*="answerInner_"],
+[class*="answer_"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-radius: var(--lg-radius-sm) !important;
+}
+
+/* ==========================================================================
+   18. EINGABE-EXTRAS: ANTWORTEN, UPLOADS, TIPPEN, SLASH-BEFEHLE
+   ========================================================================== */
+[class*="attachedBars_"],
+[class*="replyBar_"],
+[class*="stackedBars_"] {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 18px 18px 0 0 !important;
+  border: 1px solid var(--lg-border);
+  border-bottom: none;
+}
+[class*="channelAttachmentArea_"] [class*="upload_"],
+[class*="uploadContainer_"] {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-radius: var(--lg-radius-md) !important;
+  border: 1px solid var(--lg-border);
+}
+[class*="typing_"] {
+  background: transparent !important;
+}
+
+/* Drag & Drop Upload-Overlay */
+[class*="uploadArea_"] [class*="uploadDropModal_"],
+[class*="uploadDropModal_"] {
+  background: rgba(6, 50, 110, 0.92) !important;
+  backdrop-filter: var(--lg-backdrop);
+  border-radius: var(--lg-radius) !important;
+}
+[class*="uploadDropModal_"] [class*="inner_"] {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  border-radius: calc(var(--lg-radius) - 6px) !important;
+}
+
+/* Autocomplete / Slash-Befehle */
+[class*="autocomplete_"] [class*="base_"],
+[class*="autocompleteRowContent"] {
+  background: transparent !important;
+}
+[class*="autocomplete_"] [class*="selected_"] {
+  background: var(--lg-tint-active) !important;
+  border-radius: 10px;
+}
+
+/* Emoji / GIF / Sticker Picker */
+[class*="emojiPicker_"] [class*="header_"],
+[class*="contentWrapper_"] nav,
+[class*="categoryList_"],
+[class*="wrapper_"][class*="emojiPicker"],
+[class*="gifs_"] {
+  background: transparent !important;
+}
+[class*="categoryList_"] {
+  border-right: 1px solid var(--lg-border);
+}
+[class*="emojiItem_"]:hover,
+[class*="emojiItemSelected_"] {
+  background: var(--lg-tint-active) !important;
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   19. HINWEISE, TOASTS, LADEBILDSCHIRM
+   ========================================================================== */
+[class*="notice_"] {
+  margin: 6px 8px 0;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+[class*="toast_"],
+[class*="toastContainer_"] > div {
+  background: var(--lg-tint-strong) !important;
+  backdrop-filter: var(--lg-backdrop);
+  border: 1px solid var(--lg-border);
+  border-radius: 999px !important;
+  box-shadow: inset 0 1px 0 var(--lg-highlight), 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* Ladebildschirm */
+[class*="container_"][class*="fixClipping_"],
+#app-mount > [class*="container_"][class*="fixClipping_"] {
+  background: var(--lg-wallpaper) !important;
+}
+
+/* ==========================================================================
+   20. DISCOVERY, SHOP & APP-DIRECTORY
+   ========================================================================== */
+[class*="pageWrapper_"],
+[class*="discoverySidebar"],
+[class*="shop_"],
+[class*="applicationStore_"],
+[class*="container_"][class*="pageWrapper"] {
+  background: transparent !important;
+}
+[class*="card_"][class*="guildDiscovery"],
+[class*="card_"][class*="guildDiscovery"] {
+  background: var(--lg-glass-bg) !important;
+  border: 1px solid var(--lg-border);
+  border-radius: var(--lg-radius-md) !important;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   21. VENCORD-EINSTELLUNGEN & QUICKCSS
+   ========================================================================== */
+.vc-settings-card,
+.vc-plugins-card,
+.vc-plugin-card,
+.vc-addon-card,
+.vc-settings-quickActions-card {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--lg-border) !important;
+  border-radius: var(--lg-radius-md) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.vc-plugins-card:hover,
+.vc-addon-card:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+.vc-plugins-badge,
+.vc-addon-badge {
+  border-radius: 999px !important;
+}
+
+/* ==========================================================================
+   22. FOKUS-RINGE (Tastatur) & BARRIEREFREIHEIT
+   ========================================================================== */
+:focus-visible:not([role="textbox"]):not(input):not(textarea) {
+  outline: 2px solid rgba(10, 132, 255, 0.8) !important;
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+[class*="focusRing"] {
+  box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.8) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation-duration: 0.001ms !important;
+  }
+  [class*="mainCard_"]:hover {
+    transform: none;
+  }
+}
+
+/* Discord-Einstellung "Bewegungen reduzieren" respektieren */
+.reduce-motion [class*="mainCard_"]:hover {
+  transform: none;
+}
+
+/* ==========================================================================
+   23. NEUE EINSTELLUNGEN (Discord 2025, Modal) – SCHWARZES MILCHGLAS
+   Aufbau: scrim_ (verwischt die App) > … > container_.modal_ > aside.sidebar_ + content_
+   Nur EINE Unschärfe (am scrim) – das Fenster selbst ist deckend.
+   ========================================================================== */
+[class*="modal_"][class*="container_"] {
+  background: var(--lg-milk-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: var(--lg-radius) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 30px 90px rgba(0, 0, 0, 0.7) !important;
+  overflow: hidden;
+}
+[class*="modalContentInner_"] > [class*="container_"],
+[class*="modalContent_"],
+[class*="modalContentInner_"] {
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+[class*="modal_"] aside[class*="sidebar_"] {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)), rgba(0, 0, 0, 0.5) !important;
+  border: none !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   24. ALLE POPOUTS ABSICHERN (z.B. Orbs-, Status-, Konto-Untermenüs)
+   Jedes schwebende Fenster in Discords Popout-Ebene bekommt dunkles
+   Milchglas – auch wenn sein Klassenname unbekannt ist.
+   ========================================================================== */
+[class*="layerContainer_"] [role="dialog"][class]:not([class=""]):not([class*="positionContainer_"]):not([role="dialog"] [role="dialog"]):not([class*="tooltip"]):not([class*="outerContainer_"]),
+[class*="layerContainer_"] [role="menu"]:not([role="dialog"] [role="menu"]),
+[class*="orbWalletContainer_"],
+[class*="drawerSizingWrapper_"] > [class*="contentWrapper_"] {
+  background: var(--lg-milk-bg) !important;
+  backdrop-filter: var(--lg-milk-backdrop) !important;
+  -webkit-backdrop-filter: var(--lg-milk-backdrop) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: var(--lg-radius) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 24px 70px rgba(0, 0, 0, 0.65) !important;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   25. KORREKTUREN: keine doppelten Boxen in Such-/Eingabefeldern
+   ========================================================================== */
+[class*="searchBar_"] input,
+[class*="searchBar_"] [class*="input_"],
+[class*="container_"][class*="medium_"] input,
+[class*="inputWrapper_"] [class*="container_"] input,
+form [class*="channelTextArea_"] [role="textbox"],
+form [class*="channelTextArea_"] [class*="textArea_"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
