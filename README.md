@@ -4,6 +4,8 @@ An **iOS 26 Liquid Glass** inspired theme for Discord: OLED black, frosted glass
 
 Works with **Vencord** and **BetterDiscord**. Tested with Vencord.
 
+> **Made with AI assistance:** I designed this theme and wrote it together with Claude (Anthropic). I gave the direction and feedback, and the AI wrote most of the CSS.
+
 ![Theme releases](screenshots/theme-releases.png)
 
 | Chat | Forum |
@@ -51,8 +53,8 @@ If your PC is slow, set `--lg-blur` to `12px`.
 
 ## Deutsch
 
-Ein iOS-26-„Liquid Glass“-Theme für Discord: OLED-Schwarz, Glas-Panels, dunkles Milchglas für Menüs und Einstellungen und fünf Wallpaper-Vorlagen. Zur Installation die `.theme.css` in den Themes-Ordner von Vencord oder BetterDiscord legen. Alle Einstellungen stehen oben in der Datei.
+Ein iOS-26-„Liquid Glass“-Theme für Discord: OLED-Schwarz, Glas-Panels, dunkles Milchglas für Menüs und Einstellungen und fünf Wallpaper-Vorlagen. Zur Installation die `.theme.css` in den Themes-Ordner von Vencord oder BetterDiscord legen. Alle Einstellungen stehen oben in der Datei. Das Theme ist mit KI-Unterstützung (Claude) entstanden.
 
 ---
 
-Not affiliated with Apple or Discord.
+Made with AI assistance (Claude by Anthropic). Not affiliated with Apple or Discord.
