@@ -2,7 +2,7 @@
  * @name Liquid Glass Dark
  * @author erxel47
  * @description iOS 26 Liquid Glass inspired OLED dark theme – frosted glass panels, milky popouts, wallpaper presets.
- * @version 1.2.0
+ * @version 1.2.1
  * @source https://github.com/erxel47/LiquidGlass-Discord
  */
 
@@ -1107,7 +1107,7 @@ button[class*="redGlow_"] {
    Jedes schwebende Fenster in Discords Popout-Ebene bekommt dunkles
    Milchglas – auch wenn sein Klassenname unbekannt ist.
    ========================================================================== */
-[class*="layerContainer_"] [role="dialog"][class]:not([class=""]):not([class*="positionContainer_"]):not([role="dialog"] [role="dialog"]):not([class*="tooltip"]):not([class*="outerContainer_"]),
+[class*="layerContainer_"] [role="dialog"][class]:not([class=""]):not([class*="positionContainer_"]):not([class*="focusLock_"]):not([role="dialog"] [role="dialog"]):not([class*="tooltip"]):not([class*="outerContainer_"]),
 [class*="layerContainer_"] [role="menu"]:not([role="dialog"] [role="menu"]),
 [class*="orbWalletContainer_"],
 [class*="drawerSizingWrapper_"] > [class*="contentWrapper_"] {
