@@ -2,7 +2,7 @@
  * @name Liquid Glass Dark
  * @author erxel47
  * @description iOS 26 Liquid Glass inspired OLED dark theme – frosted glass panels, milky popouts, wallpaper presets.
- * @version 1.2.2
+ * @version 1.2.3
  * @source https://github.com/erxel47/LiquidGlass-Discord
  */
 
@@ -535,10 +535,10 @@ form [class*="channelTextArea_"]:focus-within > [class*="scrollableContainer_"] 
    9. BUTTONS & SCHALTER (iOS-Stil)
    ========================================================================== */
 button[class*="button_"][class*="lookFilled_"],
-button[class*="button_"][class*="colorBrand_"],
-button[class*="button_"][class*="colorGreen_"],
-button[class*="button_"][class*="colorRed_"],
-button[class*="button_"][class*="colorPrimary_"] {
+button[class*="button_"][class*="colorBrand_"]:not([class*="lookBlank_"]),
+button[class*="button_"][class*="colorGreen_"]:not([class*="lookBlank_"]),
+button[class*="button_"][class*="colorRed_"]:not([class*="lookBlank_"]),
+button[class*="button_"][class*="colorPrimary_"]:not([class*="lookBlank_"]) {
   border-radius: 999px !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 4px 14px rgba(0, 0, 0, 0.3);
   transition: transform 0.15s ease, filter 0.15s ease;
@@ -855,8 +855,14 @@ aside[class*="searchResultsWrap_"] {
   border-radius: 999px !important;
 }
 [class*="centerButton_"][class*="red"],
-button[class*="redGlow_"] {
+[class*="videoControls_"] button[class*="redGlow_"] {
   background: var(--lg-red) !important;
+}
+/* Stumm/Taub im Panel unten links: dezenter roter Glas-Hintergrund statt roter Klumpen */
+section[class*="panels_"] button[class*="redGlow_"] {
+  background: rgba(255, 69, 58, 0.16) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 69, 58, 0.35) !important;
+  border-radius: 10px !important;
 }
 
 /* Sprechen-Ring */
