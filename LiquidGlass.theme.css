@@ -2,7 +2,7 @@
  * @name Liquid Glass Dark
  * @author erxel47
  * @description iOS 26 Liquid Glass inspired OLED dark theme – frosted glass panels, milky popouts, wallpaper presets.
- * @version 1.2.7
+ * @version 1.2.8
  * @source https://github.com/erxel47/LiquidGlass-Discord
  */
 
@@ -1193,4 +1193,15 @@ form [class*="channelTextArea_"] [class*="textArea_"] {
 [class*="focusLock_"] button[class*="secondary_"] {
   background: rgba(255, 255, 255, 0.08) !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+/* ==========================================================================
+   27. UNTERMENÜS NICHT ABSCHNEIDEN
+   Discord klappt Untermenüs (z.B. "Bitte nicht stören" -> Für 15 Minuten …)
+   INNERHALB des Eltern-Menüs auf. overflow:hidden hat sie abgeschnitten.
+   ========================================================================== */
+[role="menu"],
+[class*="menu_"][role="menu"],
+[class*="layerContainer_"] [role="menu"] {
+  overflow: visible !important;
 }
